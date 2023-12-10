@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="icon" href="https://github.com/mate-desktop/mate-icon-theme/raw/master/mate/16x16/apps/utilities-terminal.png" />
+  <title>mate-terminal Code Analyzer results</title>
+</head>
+<body>
+<h1>
+  <a href="https://github.com/mate-desktop">mate-desktop</a>/<a href="https://github.com/mate-desktop/mate-terminal">mate-terminal</a> Static analyzer results
+</h1>
+  <a href="https://github.com/mate-desktop/mate-terminal" title="Github"><i class="fa fa-github fa-2x"></i>GitHub</a>
+  <a href="https://app.travis-ci.com/mate-desktop/mate-terminal/builds/267762957" title="Travis CI"><img src="https://travis-ci.org/mate-desktop/mate-terminal.svg?branch=master" alt="Build Status" /></a>
+<hr/>
+Commit: <a href="https://github.com/mate-desktop/mate-terminal/commit/9d043b40b70fd48d0297e7768cb940197ff9245c">9d043b40b70fd48d0297e7768cb940197ff9245c</a><br/>
+Compare: <a href="https://github.com/mate-desktop/mate-terminal/compare/97351f49ee3b...9d043b40b70f">97351f49ee3b...9d043b40b70f</a><br/>
+Branch: <a href="https://github.com/mate-desktop/mate-terminal/tree/master">master</a><br/>
+Time: 2023-12-10 17:54:31+00:00<br/>
+Messages:<br/>
+<pre>
+Avoid unprocessed file URIs being pasted to the terminal.
+
+The `uris_as_paths` member, which is set to `true` when the paste
+command has been triggered by the **Paste Filenames** action, was being
+checked too late: a file URI was ultimately being entered to the
+terminal, as opposed to the expected plain text version.
+
+Test plan:
+
+- Copy a file in Caja, or in any other file explorer that inserts the
+  `text/uri-list` and `text/plain` MIME formats into the clipboard.
+- Paste the file in a MATE Terminal either via `Ctrl+Shift+V`, or via
+  the **Paste** action in the context menu.
+
+Without this change, a file URI is entered. For example:
+
+```
+file:///home/jane.doe/my%20pictures/foo%20bar.jpg
+```
+
+With this change, a regular filepath [that the filesystem can recognize]
+is pasted. For example:
+
+```
+/home/jane.doe/my pictures/foo bar.jpg
+```
+
+Note that the behavior of the **Paste Filenames** context menu action
+remains unchanged (i.e. file URIs are still converted to regular paths
+surrounded by single quotes).
+</pre>
+<hr/>
+<ul>
+<li><a href="2023-12-10-175431-3360-cppcheck@9d043b40b70f_master">2023-12-10-175431-3360-cppcheck@9d043b40b70f_master</a></li>
+<li><a href="2023-09-10-073035-5013-1@4d49c80310ba_master@9d043b40b70f_master">2023-09-10-073035-5013-1@4d49c80310ba_master@9d043b40b70f_master</a></li>
+<li><a href=2023-09-23-214823-5634-cppcheck@97351f49ee3b_master>2023-09-23-214823-5634-cppcheck@97351f49ee3b_master</a></li>
+<li><a href=2023-09-23-214645-7109-cppcheck@97351f49ee3b_master>2023-09-23-214645-7109-cppcheck@97351f49ee3b_master</a></li>
+<li><a href=2023-09-23-214513-4989-1@97351f49ee3b_master>2023-09-23-214513-4989-1@97351f49ee3b_master</a></li>
+<li><a href=2023-09-22-183328-7496-cppcheck@0a2d17e54ea5_tab-content-click-fix>2023-09-22-183328-7496-cppcheck@0a2d17e54ea5_tab-content-click-fix</a></li>
+<li><a href=2023-09-22-183153-9948-cppcheck@0a2d17e54ea5_tab-content-click-fix>2023-09-22-183153-9948-cppcheck@0a2d17e54ea5_tab-content-click-fix</a></li>
+<li><a href=2023-09-22-183024-4990-1@0a2d17e54ea5_tab-content-click-fix>2023-09-22-183024-4990-1@0a2d17e54ea5_tab-content-click-fix</a></li>
+<li><a href=2023-09-20-052142-1057-cppcheck@dcfcec631898_tab-content-click-fix>2023-09-20-052142-1057-cppcheck@dcfcec631898_tab-content-click-fix</a></li>
+<li><a href=2023-09-20-052002-9451-cppcheck@dcfcec631898_tab-content-click-fix>2023-09-20-052002-9451-cppcheck@dcfcec631898_tab-content-click-fix</a></li>
+<li><a href=2023-09-20-051827-4988-1@dcfcec631898_tab-content-click-fix>2023-09-20-051827-4988-1@dcfcec631898_tab-content-click-fix</a></li>
+<li><a href=2023-09-10-073340-4169-cppcheck@4d49c80310ba_master>2023-09-10-073340-4169-cppcheck@4d49c80310ba_master</a></li>
+<li><a href=2023-09-10-073205-1556-cppcheck@4d49c80310ba_master>2023-09-10-073205-1556-cppcheck@4d49c80310ba_master</a></li>
+<li><a href=2023-09-10-073035-5013-1@4d49c80310ba_master@dcfcec631898_tab-content-click-fix>2023-09-10-073035-5013-1@4d49c80310ba_master@dcfcec631898_tab-content-click-fix</a></li>
+<li><a href=2023-09-10-073035-5013-1@4d49c80310ba_master@97351f49ee3b_master>2023-09-10-073035-5013-1@4d49c80310ba_master@97351f49ee3b_master</a></li>
+<li><a href=2023-09-10-073035-5013-1@4d49c80310ba_master@0a2d17e54ea5_tab-content-click-fix>2023-09-10-073035-5013-1@4d49c80310ba_master@0a2d17e54ea5_tab-content-click-fix</a></li>
+<li><a href=2023-09-10-073035-5013-1@4d49c80310ba_master>2023-09-10-073035-5013-1@4d49c80310ba_master</a></li>
+<li><a href=2023-08-31-123235-7411-cppcheck@eed62e83c1ce_master>2023-08-31-123235-7411-cppcheck@eed62e83c1ce_master</a></li>
+<li><a href=2023-08-31-123100-2464-cppcheck@eed62e83c1ce_master>2023-08-31-123100-2464-cppcheck@eed62e83c1ce_master</a></li>
+<li><a href=2023-08-31-122930-4996-1@eed62e83c1ce_master>2023-08-31-122930-4996-1@eed62e83c1ce_master</a></li>
+</ul>
+</body>
+</html>
